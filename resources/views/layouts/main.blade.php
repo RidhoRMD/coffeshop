@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> @yield('title') | Dashboard</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" onload="this.onload=null;this.rel='stylesheet'">
