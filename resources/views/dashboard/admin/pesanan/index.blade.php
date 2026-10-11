@@ -99,7 +99,7 @@
 
             <tbody>
 
-                @forelse($pesanan as $item)
+                    @foreach($pesanan as $item)
 
                 <tr>
 
@@ -271,18 +271,7 @@
 
                 </tr>
 
-                @empty
-
-                <tr>
-
-                    <td colspan="11" class="text-center">
-
-                        Belum ada pesanan.
-
-                    </td>
-                </tr>
-
-                @endforelse
+                        @endforeach
 
             </tbody>
 
@@ -318,4 +307,5 @@
         $('#form-pesanan').submit();
     });
 </script>
+    @include('dashboard.bagian.auto-refresh', ['urlCek' => route('admin.pesanan.cek-pembaruan')])
 @endsection

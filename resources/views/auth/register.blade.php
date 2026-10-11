@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Halaman Register</title>
+    <link rel="icon" type="image/webp" href="{{ asset('images/logo.webp') }}">
     <link href="//cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -27,7 +28,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
+    
     <script src="//cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

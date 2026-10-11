@@ -31,6 +31,13 @@ class Voucher extends Model
         return $this->hasMany(Pesanan::class);
     }
 
+    public static function nonaktifkanYangExpired()
+    {
+        return static::where('status', 'aktif')
+            ->whereDate('tanggal_expired', '<', now()->toDateString())
+            ->update(['status' => 'nonaktif']);
+    }
+
     public function isValid($totalBelanja)
     {
         if ($this->status !== 'aktif') {
@@ -41,7 +48,7 @@ class Voucher extends Model
             return ['valid' => false, 'message' => 'Voucher belum berlaku.'];
         }
 
-        if ($this->tanggal_expired->isPast()) {
+        if ($this->tanggal_expired->copy()->endOfDay()->isPast()) {
             return ['valid' => false, 'message' => 'Voucher sudah kedaluwarsa.'];
         }
 

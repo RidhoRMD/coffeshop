@@ -94,3 +94,7 @@
 </div>
 
 @endsection
+
+@section('js')
+    @include('dashboard.bagian.auto-refresh', ['urlCek' => route('barista.pesanan.cek-pembaruan')])
+@endsection

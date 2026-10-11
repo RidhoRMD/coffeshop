@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voucher - Meja {{ $meja->nomor_meja }}</title>
-     <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
+    <link rel="icon" type="image/webp" href="{{ asset('images/logo.webp') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -168,7 +168,7 @@
         .kosong { text-align: center; color: #999; font-size: 13.5px; padding: 40px 0; }
 
         @media (max-width: 640px) {
-            .navbar { padding: 0 16px; gap: 10px; height: 60px; position: relative; }
+            .navbar { padding: 0 16px; gap: 10px; height: 60px; }
             .navbar-left { gap: 10px; }
             .navbar-toggle { display: flex; }
             .navbar-menu {
@@ -179,6 +179,7 @@
                 right: 0;
                 flex-direction: column;
                 gap: 0;
+                margin-right: 0;
                 background: var(--dark);
                 padding: 8px 0;
                 box-shadow: 0 20px 50px rgba(0,0,0,0.25);
@@ -266,5 +267,6 @@
         });
     </script>
 
+    @include('order.bagian.notifikasi-status', ['kodeQr' => $meja->kode_qr])
 </body>
 </html>

@@ -4,10 +4,25 @@
 
 @section('content')
 
+<style>
+    /* Tombol aksi: ada jarak antar tombol, di HP ditumpuk selebar penuh */
+    .qr-aksi {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    @media (max-width: 576px) {
+        .qr-aksi .btn {
+            flex: 1 1 100%;
+        }
+    }
+</style>
+
 <div class="card">
 
     <div class="card-header d-flex justify-content-between align-items-center">
-
         <h3 class="card-title mb-0">
 
             <i class="fas fa-qrcode"></i>
@@ -15,10 +30,8 @@
 
         </h3>
 
-        <span class="badge badge-primary p-2">
-
+         <span class="badge badge-primary p-2 ml-auto">
             Meja {{ $meja->nomor_meja }}
-
         </span>
 
     </div>
@@ -133,34 +146,24 @@
 
     </div>
 
-    <div class="card-footer text-center">
-
-        <a href="{{ route('admin.meja.download',$meja->id) }}"
-            class="btn btn-success">
-
-            <i class="fas fa-download"></i>
-
-            Download PNG
-
+    <div class="card-footer qr-aksi">
+          <a href="{{ route('admin.meja.index') }}"
+            class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Kembali
         </a>
 
         <a href="#"
             onclick="window.print()"
             class="btn btn-primary">
-
             <i class="fas fa-print"></i>
-
             Print
-
         </a>
 
-        <a href="{{ route('admin.meja.index') }}"
-            class="btn btn-secondary">
-
-            <i class="fas fa-arrow-left"></i>
-
-            Kembali
-
+         <a href="{{ route('admin.meja.download',$meja->id) }}"
+            class="btn btn-success">
+            <i class="fas fa-download"></i>
+            Download PNG
         </a>
 
     </div>

@@ -424,6 +424,54 @@ a:not(.btn):not(.nav-link):not(.page-link):not(.dropdown-item):hover {
 /* Text utility warna biru bawaan */
 .text-primary { color: var(--brown) !important; }
 
+/* ===== ALERT SUKSES & ERROR (solid, senada alert-info) ===== */
+.alert-success {
+    background-color: var(--status-success) !important;
+    border-color: var(--status-success) !important;
+    color: #fff !important;
+}
+.alert-danger {
+    background-color: var(--status-danger) !important;
+    border-color: var(--status-danger) !important;
+    color: #fff !important;
+}
+.alert-success .close,
+.alert-danger .close {
+    color: #fff;
+    opacity: 0.8;
+}
+
+/* ===== TOMBOL AKSI: Download (success), Edit (warning), Hapus (danger) ===== */
+.btn-success {
+    background: var(--status-success) !important;
+    border-color: var(--status-success) !important;
+    color: #fff !important;
+}
+.btn-success:hover, .btn-success:focus {
+    background: #435524 !important;
+    border-color: #435524 !important;
+}
+
+.btn-warning {
+    background: var(--status-warning) !important;
+    border-color: var(--status-warning) !important;
+    color: #fff !important;
+}
+.btn-warning:hover, .btn-warning:focus {
+    background: #A87216 !important;
+    border-color: #A87216 !important;
+}
+
+.btn-danger {
+    background: var(--status-danger) !important;
+    border-color: var(--status-danger) !important;
+    color: #fff !important;
+}
+.btn-danger:hover, .btn-danger:focus {
+    background: #5F2218 !important;
+    border-color: #5F2218 !important;
+}
+
 /* ===== RESPONSIVE (mobile) ===== */
 @media (max-width: 576px) {
     .main-header .navbar-nav.ml-auto .nav-link {

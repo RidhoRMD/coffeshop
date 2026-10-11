@@ -9,6 +9,8 @@ class VoucherController extends Controller
 {
     public function index()
     {
+        Voucher::nonaktifkanYangExpired();
+        
         $voucher = Voucher::latest()->get();
 
         return view('dashboard.admin.voucher.index', compact('voucher'));

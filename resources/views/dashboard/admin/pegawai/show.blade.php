@@ -155,23 +155,15 @@
     </div>
 
     <div class="card-footer">
-
-        <a href="{{ route('admin.pegawai.edit', $pegawai->id) }}"
-            class="btn btn-warning">
-
-            <i class="fas fa-edit"></i>
-
-            Edit
-
-        </a>
-
         <a href="{{ route('admin.pegawai.index') }}"
             class="btn btn-secondary">
-
             <i class="fas fa-arrow-left"></i>
-
             Kembali
-
+        </a>
+        
+        <a href="{{ route('admin.pegawai.edit', $pegawai->id) }}"
+            class="btn btn-warning">
+            Edit
         </a>
 
     </div>

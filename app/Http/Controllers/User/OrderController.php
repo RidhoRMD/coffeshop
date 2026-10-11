@@ -30,6 +30,12 @@ class OrderController extends Controller
             return view('order.meja-terisi', compact('meja'));
         }
 
+        // Meja sudah dikosongkan kasir berarti sesi meja sebelumnya sudah berakhir,
+        // jadi riwayat pesanan dari sesi itu tidak ditampilkan lagi ke customer ini.
+        if ($meja->status === 'kosong') {
+            session()->forget("riwayat_pesanan_{$kode_qr}");
+        }
+
         $kategori = KategoriMenu::with(['menu' => function ($q) {
             $q->where('status', 'tersedia')
                 ->withAvg('ratings', 'bintang')
@@ -84,14 +90,6 @@ class OrderController extends Controller
     protected function customerAdaPesananAktifDiMeja($meja)
     {
         $customerToken = $this->getCustomerToken();
-
-        \Log::info('cek token', [
-        'meja' => $meja->nomor_meja,
-        'kode_qr' => $meja->kode_qr,
-        'cookie_token' => $customerToken,
-        'db_token' => $meja->customer_token,
-        'match' => $customerToken === $meja->customer_token,
-        ]);
 
         if (!$customerToken) {
             return false;
@@ -437,6 +435,10 @@ class OrderController extends Controller
             'CS-' .
             strtoupper(Str::random(6));
 
+        // Catat dulu apakah meja ini baru saja dikosongkan (sesi meja baru),
+        // sebelum status meja diubah jadi "dipesan" di bawah.
+        $mejaSebelumnyaKosong = $meja->status === 'kosong';
+
         $pesanan = Pesanan::create([
             'kode_pesanan' =>
                 $kodePesanan,
@@ -543,6 +545,11 @@ class OrderController extends Controller
                 []
             );
 
+        // Sesi meja baru: mulai riwayat dari nol, buang pesanan sesi sebelumnya.
+        if ($mejaSebelumnyaKosong) {
+            $riwayat = [];
+        }
+
         $riwayat[] =
             $kodePesanan;
 
@@ -559,7 +566,7 @@ class OrderController extends Controller
             "voucher_{$kode_qr}"
         );
 
-        // Simpan cookie ke browser
+    // Simpan cookie ke browser
     Cookie::queue(
         'customer_token',
         $customerToken,
@@ -750,6 +757,19 @@ class OrderController extends Controller
                 'pesananSaya'
             )
         );
+    }
+
+    public function statusPesanan($kode_qr)
+    {
+        Meja::where('kode_qr', $kode_qr)->firstOrFail();
+
+        $daftarKode = session("riwayat_pesanan_{$kode_qr}", []);
+
+        $pesanan = Pesanan::whereIn('kode_pesanan', $daftarKode)
+            ->get(['kode_pesanan', 'status_pesanan'])
+            ->pluck('status_pesanan', 'kode_pesanan');
+
+        return response()->json(['pesanan' => $pesanan]);
     }
 
     public function riwayatSaya($kode_qr)

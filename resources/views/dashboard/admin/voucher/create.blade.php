@@ -52,7 +52,7 @@
                                 <input type="text" id="minimal_belanja_display" class="form-control" placeholder="0" inputmode="numeric" autocomplete="off" required>
                                 <input type="hidden" name="minimal_belanja" id="minimal_belanja">
                             </div>
-                            <small class="text-muted">Rp 10.000 - Rp 100.000</small>
+                            <small class="text-muted">Rp 10.000 - Rp 1.000.000</small>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Kuota Penggunaan</label>
@@ -81,7 +81,7 @@
                     </div>
 
                     <a href="{{ route('admin.voucher.index') }}" class="btn btn-secondary">Kembali</a>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                    <button type="submit" class="btn btn-primary"></i> Simpan</button>
 
                 </form>
 
@@ -102,7 +102,7 @@
                 </ul>
                 <p><strong>Batasan:</strong></p>
                 <ul>
-                    <li>Minimal pembelian: Rp 10.000 - Rp 100.000</li>
+                    <li>Minimal pembelian: Rp 10.000 - Rp 1.000.000</li>
                     <li>Kuota: maksimal 1.000 (0 = unlimited)</li>
                 </ul>
                 <p><strong>Contoh:</strong></p>
@@ -177,7 +177,7 @@
         });
     }
 
-    pasangFormatRupiah('minimal_belanja_display', 'minimal_belanja', 100000);
+    pasangFormatRupiah('minimal_belanja_display', 'minimal_belanja', 1000000);
     pasangFormatRupiah('batas_pemakaian_display', 'batas_pemakaian', 1000);
 </script>
 @endsection

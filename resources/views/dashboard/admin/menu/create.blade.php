@@ -134,19 +134,14 @@
         </div>
 
         <div class="card-footer">
-
-            <button class="btn btn-primary">
-
-                Simpan
-
-            </button>
-
             <a href="{{ route('admin.menu.index') }}"
                 class="btn btn-secondary">
-
                 Kembali
-
             </a>
+            
+             <button class="btn btn-primary">
+                Simpan
+            </button>
 
         </div>
 

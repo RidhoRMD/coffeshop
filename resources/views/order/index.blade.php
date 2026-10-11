@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - Meja {{ $meja->nomor_meja }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
+    <link rel="icon" type="image/webp" href="{{ asset('images/logo.webp') }}">
        <meta name="csrf-token" content="{{ csrf_token() }}">
     @if(isset($promo) && $promo && !empty($promo->gambar))
     <link rel="preload" as="image" href="{{ asset('uploads/promo/'.$promo->gambar) }}">
@@ -591,6 +591,52 @@
             margin: 0;
         }
 
+        /* KARTU BANTUAN */
+        .kartu-bantuan {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+            padding: 20px;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        .kartu-bantuan .ikon-bantuan {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(110, 71, 59, 0.08);
+            color: var(--brown);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .kartu-bantuan .ikon-bantuan svg { width: 22px; height: 22px; fill: currentColor; }
+        .kartu-bantuan .teks-bantuan { flex: 1; min-width: 0; }
+        .kartu-bantuan .teks-bantuan strong { display: block; font-size: 14.5px; font-weight: 600; color: var(--dark); }
+        .kartu-bantuan .teks-bantuan span { display: block; font-size: 12.5px; color: #888; line-height: 1.5; margin-top: 3px; }
+        .btn-bantuan {
+            flex-shrink: 0;
+            padding: 10px 18px;
+            border-radius: 100px;
+            background: var(--dark);
+            color: #fff;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-bantuan:hover { background: var(--brown); }
+
+        @media (max-width: 640px) {
+            .kartu-bantuan { flex-wrap: wrap; padding: 16px; gap: 12px; }
+            .kartu-bantuan .teks-bantuan { flex-basis: calc(100% - 62px); }
+            .btn-bantuan { width: 100%; text-align: center; }
+        }
+
         /* FLOATING CART BUTTON (pengganti sidebar Keranjang) */
         .fab-cart {
             position: fixed;
@@ -851,7 +897,6 @@
                 padding: 0 16px;
                 gap: 10px;
                 height: 60px;
-                position: relative;
             }
             .navbar-left {
                 gap: 10px;
@@ -867,6 +912,7 @@
                 right: 0;
                 flex-direction: column;
                 gap: 0;
+                margin-right: 0;
                 background: var(--dark);
                 padding: 8px 0;
                 box-shadow: var(--shadow-lg);
@@ -1115,6 +1161,17 @@
                     </div>
                 @endif
             @endforeach
+            <div class="kartu-bantuan">
+                <span class="ikon-bantuan">
+                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                </span>
+                <div class="teks-bantuan">
+                    <strong>Ada kendala?</strong>
+                    <span>Pesanan atau pembayaran bermasalah? Hubungi tim kami ya.</span>
+                </div>
+                <a href="https://wa.me/6282288512481?text={{ rawurlencode('Halo Raund-Raund, saya di Meja '.$meja->nomor_meja.' dan butuh bantuan: ') }}"
+                    target="_blank" rel="noopener" class="btn-bantuan">Hubungi</a>
+            </div>
         </main>
     </div>
 
@@ -1695,5 +1752,6 @@
         refreshAllCardQty();
     </script>
 
+    @include('order.bagian.notifikasi-status', ['kodeQr' => $meja->kode_qr])
 </body>
 </html>

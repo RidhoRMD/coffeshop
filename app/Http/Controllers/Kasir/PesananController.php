@@ -8,6 +8,7 @@ use App\Models\Meja;
 use App\Models\Menu;
 use App\Models\Pesanan;
 use App\Services\MidtransService;
+use App\Services\TandaPembaruan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ class PesananController extends Controller
 {
     public function index()
     {
+        $signature = $this->signaturePembaruan();
         $shiftAktif = $this->getShiftAktif();
         $awalHari = $this->awalHariOperasional();
 
@@ -61,7 +63,7 @@ class PesananController extends Controller
             ->latest()
             ->get();
 
-        return view('dashboard.kasir.pesanan.index', compact('pesanan'));
+        return view('dashboard.kasir.pesanan.index', compact('pesanan', 'signature'));
     }
 
      public function create()
@@ -514,6 +516,7 @@ class PesananController extends Controller
 
     public function dashboard()
     {
+        $signature = $this->signaturePembaruan();
         $shiftAktif = $this->getShiftAktif();
         $awalHari = $this->awalHariOperasional();
 
@@ -545,7 +548,8 @@ class PesananController extends Controller
             'pendapatanHariIni',
             'mejaTerisi',
             'totalMeja',
-            'pesananTerbaru'
+            'pesananTerbaru',
+            'signature'
         ));
     }
 
@@ -577,6 +581,11 @@ class PesananController extends Controller
             'diskon'      => $diskon,
             'total_akhir' => max(0, $request->total - $diskon),
         ]);
+    }
+
+    private function signaturePembaruan()
+    {
+        return TandaPembaruan::pesanan();
     }
 
     private function getShiftAktif()

@@ -9,7 +9,7 @@
             <p class="mb-0 text-muted">Total item selesai dibuat hari ini</p>
             <h2 class="mb-0">{{ $totalItem }} <small style="font-size: 16px;">porsi</small></h2>
         </div>
-        <i class="fas fa-mug-hot fa-3x text-muted"></i>
+        <i class="fas fa-mug-hot fa-3x text-muted ml-auto"></i>
     </div>
 </div>
 

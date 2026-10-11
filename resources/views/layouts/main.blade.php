@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> @yield('title') | Dashboard</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
+    <link rel="icon" type="image/webp" href="{{ asset('images/logo.webp') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" onload="this.onload=null;this.rel='stylesheet'">
@@ -148,6 +148,23 @@
     <script src="{{ asset('assets') }}/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('assets') }}/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('assets') }}/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <!-- Bahasa Indonesia untuk semua tabel DataTables -->
+    <script>
+        $.extend(true, $.fn.dataTable.defaults, {
+            language: {
+                search: 'Cari:',
+                emptyTable: 'Belum ada data.',
+                zeroRecords: 'Data tidak ditemukan.',
+                info: 'Menampilkan _START_ - _END_ dari _TOTAL_ data',
+                infoEmpty: 'Menampilkan 0 data',
+                infoFiltered: '(disaring dari _MAX_ data)',
+                paginate: {
+                    previous: 'Sebelumnya',
+                    next: 'Berikutnya'
+                }
+            }
+        });
+    </script>
     <!-- Page specific script -->
     <script>
         $(function() {

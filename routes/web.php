@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Barista\MenuController as BaristaMenuController;
 use App\Http\Controllers\Barista\PesananController as BaristaPesananController;
-use App\Http\Controllers\BukuController;
 use App\Http\Controllers\Kasir\PesananController as KasirPesananController;
 use App\Http\Controllers\Kasir\ShiftController;
 use App\Http\Controllers\KategoriMenuController;
@@ -22,6 +21,7 @@ use App\Models\KategoriMenu;
 use App\Models\Meja;
 use App\Models\Menu;
 use App\Models\Pesanan;
+use App\Http\Controllers\PembaruanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -101,9 +101,6 @@ Route::get('/ulasan', function (\Illuminate\Http\Request $request) {
     return view('landing.ulasan', compact('breakdown', 'totalRating', 'avgRating', 'ulasan', 'filterBintang'));
 })->name('ulasan.index');
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('store.register');
-
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('store.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -177,6 +174,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::prefix('pesanan')->name('pesanan.')->group(function () {
             Route::get('/', [PesananController::class, 'index'])->name('index');
+            Route::get('/cek-pembaruan', \App\Http\Controllers\PembaruanController::class)->name('cek-pembaruan');
             Route::get('/{id}', [PesananController::class, 'show'])->name('show');
             Route::put('/{id}', [PesananController::class, 'update'])->name('update');
             Route::delete('/{id}', [PesananController::class, 'destroy'])->name('delete');
@@ -226,7 +224,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/edit/{id}', [VoucherController::class, 'edit'])->name('edit');
         Route::put('/edit/{id}', [VoucherController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [VoucherController::class, 'destroy'])->name('delete');
-});
+        });
     });
 
 
@@ -253,6 +251,7 @@ Route::prefix('kasir')
 
             Route::prefix('pesanan')->name('pesanan.')->group(function () {
                 Route::get('/', [KasirPesananController::class, 'index'])->name('index');
+                Route::get('/cek-pembaruan', PembaruanController::class)->name('cek-pembaruan');
                 Route::get('/baru', [KasirPesananController::class, 'create'])->name('create');
                 Route::get('/baru/dine-in', [KasirPesananController::class, 'createDineIn'])->name('create.dinein');
                 Route::post('/baru/dine-in', [KasirPesananController::class, 'storeDineIn'])->name('store.dinein');
@@ -296,6 +295,7 @@ Route::prefix('barista')
 
         Route::prefix('pesanan')->name('pesanan.')->group(function () {
             Route::get('/', [BaristaPesananController::class, 'index'])->name('index');
+            Route::get('/cek-pembaruan', \App\Http\Controllers\PembaruanController::class)->name('cek-pembaruan');
             Route::put('/{id}/status', [BaristaPesananController::class, 'updateStatus'])->name('status');
             Route::get('/riwayat', [BaristaPesananController::class, 'riwayat'])->name('riwayat');
         });
@@ -318,6 +318,7 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::get('/sukses/{kode}', [UserOrderController::class, 'sukses'])->name('sukses');
     Route::get('/{kode_qr}/pesanan', [UserOrderController::class, 'pesananSaya'])->name('pesanan');
     Route::get('/{kode_qr}/riwayat', [UserOrderController::class, 'riwayatSaya'])->name('riwayat');
+    Route::get('/{kode_qr}/status-pesanan', [UserOrderController::class, 'statusPesanan'])->name('status');
     Route::post('/{kode_qr}/rating', [UserOrderController::class, 'submitRating'])->name('rating.store');
     Route::get('/{kode_qr}/voucher', [UserOrderController::class, 'voucherList'])->name('voucher.list');
     Route::post('/{kode_qr}/voucher/apply', [UserOrderController::class, 'applyVoucher'])->name('voucher.apply');

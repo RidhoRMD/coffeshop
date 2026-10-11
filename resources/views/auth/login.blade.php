@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Staff · Raund Raund</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
+    <link rel="icon" type="image/webp" href="{{ asset('images/logo.webp') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -365,7 +365,8 @@
             <div class="login-header">
                 <img src="{{ asset('images/logo.webp') }}" alt="Raund Raund" width="72" height="72" style="width:72px; height:72px; margin:0 auto 20px; display:block;">
                 <h1>Raund <span>Raund</span></h1>
-                <p>Masuk untuk mengakses sistem kasir &amp; operasional staff.</p>
+                <p>Masuk untuk mengelola pesanan</p>
+                <p>dan operasional kafe.</p>
                 <div class="staff-badge">
                     <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z"/></svg>
                     Khusus Staff
@@ -411,7 +412,6 @@
                     <div class="form-group">
                         <div class="form-label-row">
                             <label>Password</label>
-                            <a href="#">Forgot?</a>
                         </div>
                         <div class="input-wrapper">
                             <svg class="field-icon" width="14" height="14" viewBox="0 0 448 512" fill="currentColor"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0S368 64.5 368 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>

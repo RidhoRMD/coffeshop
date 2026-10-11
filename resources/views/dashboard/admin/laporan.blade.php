@@ -248,7 +248,8 @@
                     next: 'Berikutnya'
                 },
                 info: 'Menampilkan _START_ - _END_ dari _TOTAL_ transaksi',
-                zeroRecords: 'Tidak ada transaksi yang cocok.'
+                zeroRecords: 'Tidak ada transaksi yang cocok.',
+                    emptyTable: 'Tidak ada transaksi pada rentang tanggal ini.'
             }
         });
 

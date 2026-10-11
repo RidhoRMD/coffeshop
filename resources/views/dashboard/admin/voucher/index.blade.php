@@ -41,7 +41,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($voucher as $item)
+                @foreach($voucher as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td><span class="badge badge-dark">{{ $item->kode }}</span></td>
@@ -50,7 +50,7 @@
                         {{ $item->tipe_diskon == 'persen' ? $item->nilai_diskon.'%' : 'Rp '.number_format($item->nilai_diskon,0,',','.') }}
                     </td>
                     <td>{{ $item->minimal_belanja ? 'Rp '.number_format($item->minimal_belanja,0,',','.') : '-' }}</td>
-                    <td>{{ $item->jumlah_terpakai }} / {{ $item->batas_pemakaian ?? '∞' }}</td>
+                    <td>{{ $item->jumlah_terpakai }} / {{ $item->batas_pemakaian > 0 ? $item->batas_pemakaian : '∞' }}</td>
                     <td>{{ $item->tanggal_expired->format('d/m/Y') }}</td>
                     <td>
                         @if($item->status == 'aktif')
@@ -75,11 +75,7 @@
                         </form>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="9" class="text-center">Belum ada voucher.</td>
-                </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
 

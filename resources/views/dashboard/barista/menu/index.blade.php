@@ -33,15 +33,16 @@
     <div class="card-header">
         <h3 class="card-title">Status Ketersediaan Menu</h3>
     </div>
-    <div class="card-body">
-       <table class="table table-hover" style="table-layout: fixed; width: 100%;">
+        <div class="card-body">
+        <div class="table-responsive">
+       <table class="table table-hover text-nowrap" style="min-width: 560px; width: 100%;">
     <thead>
         <tr>
-            <th style="width: 30%;">Menu</th>
-            <th style="width: 20%;">Kategori</th>
-            <th style="width: 15%;">Stok</th>
-            <th style="width: 15%;" >Status</th>
-            <th style="width: 140px;" class="text-center">Aksi</th>
+            <th>Menu</th>
+            <th>Kategori</th>
+            <th class="text-center">Stok</th>
+            <th>Status</th>
+            <th class="text-center" style="width: 140px;">Aksi</th>
         </tr>
     </thead>
             <tbody>
@@ -64,9 +65,10 @@
                             </button>
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                     @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -98,7 +100,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Simpan
+                            Simpan
                         </button>
                     </div>
                 </form>

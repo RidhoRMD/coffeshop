@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat - Meja {{ $meja->nomor_meja }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.webp') }}">
+    <link rel="icon" type="image/webp" href="{{ asset('images/logo.webp') }}">
        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -319,6 +319,71 @@
         }
         .alert-success { background: #d4edda; color: #155724; }
         .alert-error { background: #f8d7da; color: #721c24; }
+
+        /* POPUP (pengganti alert bawaan browser) */
+        .rr-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 18, 11, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 60;
+        }
+        .rr-modal-overlay.show { display: flex; }
+        .rr-modal-box {
+            background: #fff;
+            border-radius: 24px;
+            max-width: 340px;
+            width: 100%;
+            padding: 28px 24px 22px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(26, 18, 11, 0.25);
+            animation: rrModalIn 0.25s ease;
+        }
+        @keyframes rrModalIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .rr-modal-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(224, 165, 39, 0.14);
+            color: #E0A527;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0 auto 16px;
+        }
+        .rr-modal-box h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .rr-modal-box p {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .rr-modal-btn {
+            width: 100%;
+            background: var(--dark);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -436,7 +501,38 @@
         @endif
     </main>
 
+    <div class="rr-modal-overlay" id="modal-rating">
+        <div class="rr-modal-box">
+            <div class="rr-modal-icon">&#9733;</div>
+            <h3>Pilih bintang dulu ya</h3>
+            <p>Kasih rating bintang 1 sampai 5 sebelum mengirim saran atau komentar kamu.</p>
+            <button type="button" class="rr-modal-btn" onclick="tutupModalRating()">Oke, mengerti</button>
+        </div>
+    </div>
+
     <script>
+        let formRatingTerakhir = null;
+
+        function bukaModalRating(form) {
+            formRatingTerakhir = form;
+            document.getElementById('modal-rating').classList.add('show');
+        }
+
+        function tutupModalRating() {
+            document.getElementById('modal-rating').classList.remove('show');
+
+            // Setelah popup ditutup, arahkan layar ke deretan bintang yang belum dipilih
+            if (formRatingTerakhir) {
+                const bintang = formRatingTerakhir.querySelector('.rating-stars-input');
+                if (bintang) bintang.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                formRatingTerakhir = null;
+            }
+        }
+
+        document.getElementById('modal-rating').addEventListener('click', function (e) {
+            if (e.target === this) tutupModalRating();
+        });
+
         function toggleNavbarMenu() {
             document.getElementById('navbar-menu').classList.toggle('show');
         }
@@ -469,11 +565,12 @@
                 const bintang = form.querySelector('.bintang-input').value;
                 if (!bintang) {
                     e.preventDefault();
-                    alert('Silakan pilih rating bintang terlebih dahulu.');
+                    bukaModalRating(form);
                 }
             });
         });
     </script>
 
+    @include('order.bagian.notifikasi-status', ['kodeQr' => $meja->kode_qr])
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesanan Berhasil</title>
+    <link rel="icon" type="image/webp" href="{{ asset('images/logo.webp') }}">
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -105,6 +106,21 @@
             display: block;
             cursor: pointer;
         }
+        .btn-outline {
+            width: 100%;
+            background: transparent;
+            color: var(--brown);
+            border: 1.5px solid var(--tan);
+            border-radius: 14px;
+            padding: 14.5px;
+            font-weight: 700;
+            font-size: 15px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
     </style>
 </head>
 <body>
@@ -154,10 +170,14 @@
             </div>
         </div>
 
+        <a href="{{ route('order.pesanan', $pesanan->meja->kode_qr) }}" class="btn-outline">
+            Lihat Pesanan
+        </a>
         <a href="{{ route('order.index', $pesanan->meja->kode_qr) }}" class="btn-full">
             Pesan Lagi
         </a>
     </main>
 
+    @include('order.bagian.notifikasi-status', ['kodeQr' => $pesanan->meja->kode_qr])
 </body>
 </html>

@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <a href="{{ route('admin.voucher.index') }}" class="btn btn-secondary">Kembali</a>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
+                    <button type="submit" class="btn btn-primary"> Update</button>
 
                 </form>
 

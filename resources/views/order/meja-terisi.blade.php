@@ -266,7 +266,6 @@
 
   <!-- Nomer meja dengan icon & style premium -->
   <div class="table-pill">
-    <i class="fas fa-hashtag" style="font-weight: 300;"></i>
     <strong>Meja {{ $meja->nomor_meja ?? '4' }}</strong>
     <i class="fas fa-lock" style="font-size: 0.75rem; opacity: 0.7; margin-left: 4px;"></i>
   </div>

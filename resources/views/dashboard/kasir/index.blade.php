@@ -132,3 +132,7 @@
 </div>
 
 @endsection
+
+@section('js')
+    @include('dashboard.bagian.auto-refresh', ['urlCek' => route('kasir.pesanan.cek-pembaruan'), 'tanda' => $signature])
+@endsection

@@ -200,3 +200,7 @@
 </div>
 
 @endsection
+
+@section('js')
+    @include('dashboard.bagian.auto-refresh', ['urlCek' => route('admin.pesanan.cek-pembaruan')])
+@endsection
